@@ -137,7 +137,7 @@ public class guiMenu {
 	 *         gui.
 	 */
 	public GuiButton addButton(int ID) {
-		return this.slider = new guiSliderButton(ID, xPos + width + 3, yPos, 6, 9, height);
+		return this.slider = new guiSliderButton(ID, xPos + width + 3, yPos, height);
 	}
 
 	/**

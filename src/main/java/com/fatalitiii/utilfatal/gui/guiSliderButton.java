@@ -43,8 +43,8 @@ public class guiSliderButton extends GuiButton {
 	 *            of your menu.
 	 *
 	 */
-	public guiSliderButton(int ID, int x, int y, int width, int height, float maxValue) {
-		super(ID, x, y, width, height, "");
+	public guiSliderButton(int ID, int x, int y, float maxValue) {
+		super(ID, x, y, 6, 9, "");
 		this.id = ID;
 		this.xPosition = x;
 		this.yPosition = y;
