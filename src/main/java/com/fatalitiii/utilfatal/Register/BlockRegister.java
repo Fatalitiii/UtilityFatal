@@ -66,11 +66,13 @@ public class BlockRegister {
 	 */
 	@SuppressWarnings("unchecked")
 	public static void registerRenders(String MOD_ID) {
-		ArrayList<Block> modBlocks = blockRegistry.get(MOD_ID);
-		for (Block block : modBlocks) {
-			Item item = Item.getItemFromBlock(block);
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0,
-					new ModelResourceLocation(MOD_ID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
+		if (!blockRegistry.isEmpty()) {
+			ArrayList<Block> modBlocks = blockRegistry.get(MOD_ID);
+			for (Block block : modBlocks) {
+				Item item = Item.getItemFromBlock(block);
+				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0,
+						new ModelResourceLocation(MOD_ID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
+			}
 		}
 	}
 }

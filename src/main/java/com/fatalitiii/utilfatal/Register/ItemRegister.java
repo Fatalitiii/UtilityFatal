@@ -48,8 +48,6 @@ public class ItemRegister {
 			items.add(item);
 			itemRegistry.put(MOD_ID, items);
 
-			System.out.println("Registered : " + name + " from " + MOD_ID);
-
 		} catch (InstantiationException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,10 +63,12 @@ public class ItemRegister {
 	 */
 	@SuppressWarnings("unchecked")
 	public static void registerRenders(String MOD_ID) {
-		ArrayList<Item> modItems = itemRegistry.get(MOD_ID);
-		for (Item item : modItems) {
-			Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0,
-					new ModelResourceLocation(MOD_ID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
+		if (!itemRegistry.isEmpty()) {
+			ArrayList<Item> modItems = itemRegistry.get(MOD_ID);
+			for (Item item : modItems) {
+				Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0,
+						new ModelResourceLocation(MOD_ID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
+			}
 		}
 	}
 }
