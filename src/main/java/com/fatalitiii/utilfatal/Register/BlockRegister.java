@@ -49,8 +49,6 @@ public class BlockRegister {
 			blocks.add(block);
 			blockRegistry.put(MOD_ID, blocks);
 
-			System.out.println("Registered : " + name + " from " + MOD_ID);
-
 		} catch (InstantiationException | IllegalAccessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
