@@ -137,8 +137,7 @@ public class guiMenu {
 	 *         gui.
 	 */
 	public GuiButton addButton(int ID) {
-		return this.slider = new guiSliderButton(ID, xPos + width + 3, yPos, 6, 9, height,
-				new ResourceLocation("utilfatal:textures/gui/gui.png"));
+		return this.slider = new guiSliderButton(ID, xPos + width + 3, yPos, 6, 9, height);
 	}
 
 	/**

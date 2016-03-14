@@ -19,6 +19,7 @@ public class guiSliderButton extends GuiButton {
 	protected int xOffset, yOffset;
 	protected int width, height;
 	private int xPosition, yPosition;
+	private int textureX, textureY;
 	private float sliderValue = 0F, maxValue;
 
 	@SuppressWarnings("unused")
@@ -40,9 +41,43 @@ public class guiSliderButton extends GuiButton {
 	 * @param maxValue
 	 *            the max value you want the slider to go to. Normally the hight
 	 *            of your menu.
+	 *
 	 */
-	public guiSliderButton(int ID, int x, int y, int width, int height, float maxValue,
-			ResourceLocation resourceLocation) {
+	public guiSliderButton(int ID, int x, int y, int width, int height, float maxValue) {
+		super(ID, x, y, width, height, "");
+		this.id = ID;
+		this.xPosition = x;
+		this.yPosition = y;
+		this.width = width;
+		this.height = height;
+		this.texture = new ResourceLocation("utilfatal:textures/gui/gui.png");
+		this.textureX = 39;
+		this.textureY = 0;
+		this.maxValue = maxValue - height;
+	}
+	
+	/**
+	 * @param ID
+	 *            Button ID
+	 * @param x
+	 *            X Position
+	 * @param y
+	 *            Y Position
+	 * @param width
+	 *            width of the texture
+	 * @param height
+	 *            height of the texture
+	 * @param maxValue
+	 *            the max value you want the slider to go to. Normally the hight
+	 *            of your menu.
+	 * @param resourceLocation
+	 *            Resource location file
+	 * @param textureX
+	 *            texture x position
+	 * @param textureY
+	 *            texture y position       
+	 */
+	public guiSliderButton(int ID, int x, int y, int width, int height, float maxValue, ResourceLocation resourceLocation, int textureX, int textureY) {
 		super(ID, x, y, width, height, "");
 		this.id = ID;
 		this.xPosition = x;
@@ -50,6 +85,8 @@ public class guiSliderButton extends GuiButton {
 		this.width = width;
 		this.height = height;
 		this.texture = resourceLocation;
+		this.textureX = textureX;
+		this.textureY = textureY;
 		this.maxValue = maxValue - height;
 	}
 
@@ -106,7 +143,7 @@ public class guiSliderButton extends GuiButton {
 			GL11.glEnable(GL11.GL_BLEND);
 			OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			this.drawTexturedModalRect(this.xPosition, this.yPosition + (int) sliderValue, 39 + scrollING, 0,
+			this.drawTexturedModalRect(this.xPosition, this.yPosition + (int) sliderValue, textureX + scrollING, textureY,
 					this.width, this.height);
 			this.mouseDragged(mc, i, j);
 		}
