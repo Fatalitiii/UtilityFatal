@@ -85,8 +85,6 @@ public class jsonToClass {
 					Object item = itemClass;
 					item = myGson.fromJson(json, itemClass.getClass());
 					jsonNames.add(item);
-					System.out.println(cls);
-					System.out.println(item);
 				}
 
 				return jsonNames;
