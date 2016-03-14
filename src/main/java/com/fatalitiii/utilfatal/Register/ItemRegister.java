@@ -49,7 +49,6 @@ public class ItemRegister {
 			itemRegistry.put(MOD_ID, items);
 
 		} catch (InstantiationException | IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

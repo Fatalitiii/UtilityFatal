@@ -11,6 +11,8 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -343,4 +345,70 @@ public class guiElement {
 		}
 		addText(xPosition, yPosition, text, scale, 14737632, true);
 	}
+
+	/**
+	 * 
+	 * @param xPosition
+	 *            X position on screen
+	 * @param yPosition
+	 *            Y position on screen
+	 * @param u
+	 *            Texture start X
+	 * @param v
+	 *            Texture start Y
+	 * @param width
+	 *            Width on screen
+	 * @param height
+	 *            Height on screen
+	 * @param textureWidth
+	 *            Texture width
+	 * @param textureHeight
+	 *            Texture height
+	 */
+	public static void drawRectWithUV(int xPosition, int yPosition, float u, float v, int width, int height,
+			float textureWidth, float textureHeight) {
+		drawRectWithUV(xPosition, yPosition, u, v, width, height, textureWidth, textureHeight, 256, 256);
+	}
+
+	/**
+	 * 
+	 * @param xPosition
+	 *            X position on screen
+	 * @param yPosition
+	 *            Y position on screen
+	 * @param u
+	 *            Texture start X
+	 * @param v
+	 *            Texture start Y
+	 * @param width
+	 *            Width on screen
+	 * @param height
+	 *            Height on screen
+	 * @param textureWidth
+	 *            Texture width
+	 * @param textureHeight
+	 *            Texture height
+	 * @param textureSheetWidth
+	 *            Texture resource width if not 256
+	 * @param textureSheetHeight
+	 *            Texture resource height if not 256
+	 */
+	public static void drawRectWithUV(int xPosition, int yPosition, float u, float v, int width, int height,
+			float textureWidth, float textureHeight, int textureSheetWidth, int textureSheetHeight) {
+		float scaleX = 1.0F / textureSheetWidth;
+		float scaleY = 1.0F / textureSheetHeight;
+		Tessellator tessellator = Tessellator.getInstance();
+		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+		worldrenderer.startDrawingQuads();
+		worldrenderer.addVertexWithUV((double) xPosition, (double) (yPosition + height), 0.0D, (double) (u * scaleX),
+				(double) (v + textureHeight) * scaleY);
+		worldrenderer.addVertexWithUV((double) (xPosition + width), (double) (yPosition + height), 0.0D,
+				(double) (u + textureWidth) * scaleX, (double) (v + textureHeight) * scaleY);
+		worldrenderer.addVertexWithUV((double) (xPosition + width), (double) yPosition, 0.0D,
+				(double) ((u + textureWidth) * scaleX), (double) (v * scaleY));
+		worldrenderer.addVertexWithUV((double) xPosition, (double) yPosition, 0.0D, (double) (u * scaleX),
+				(double) (v * scaleY));
+		tessellator.draw();
+	}
+
 }
