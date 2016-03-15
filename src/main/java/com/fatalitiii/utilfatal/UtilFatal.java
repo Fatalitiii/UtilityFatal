@@ -34,7 +34,7 @@ public class UtilFatal {
 		data.credits = EnumChatFormatting.BLUE + "Fatalitiii";
 		data.authorList.add("Fatalitiii");
 		data.description = "Utility Fatalitiii, wow thats a mouth full :P. This is a mod that has nice utilitys that can come in handy when developing mods.";
-		data.logoFile = "assets/utilfatal/textures/misc/logo.png";
+		data.logoFile = "assets/utilfatal/textures/misc/uflogo.png";
 	}
 
 	@EventHandler

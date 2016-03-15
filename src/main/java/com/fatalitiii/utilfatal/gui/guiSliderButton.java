@@ -3,6 +3,8 @@ package com.fatalitiii.utilfatal.gui;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
+import com.fatalitiii.utilfatal.utils.ModInfo;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -48,9 +50,9 @@ public class guiSliderButton extends GuiButton {
 		this.id = ID;
 		this.xPosition = x;
 		this.yPosition = y;
-		this.width = width;
-		this.height = height;
-		this.texture = new ResourceLocation("utilfatal:textures/gui/gui.png");
+		this.width = 6;
+		this.height = 9;
+		this.texture = new ResourceLocation(ModInfo.MOD_ID + ":textures/gui/gui.png");
 		this.textureX = 39;
 		this.textureY = 0;
 		this.maxValue = maxValue - height;
@@ -146,6 +148,7 @@ public class guiSliderButton extends GuiButton {
 			this.drawTexturedModalRect(this.xPosition, this.yPosition + (int) sliderValue, textureX + scrollING, textureY,
 					this.width, this.height);
 			this.mouseDragged(mc, i, j);
+			System.out.println(texture+"     "+textureX+"     "+textureY+"     "+sliderValue+this.xPosition+"     "+this.yPosition);
 		}
 	}
 
