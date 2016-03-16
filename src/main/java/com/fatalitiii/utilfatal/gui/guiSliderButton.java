@@ -148,7 +148,6 @@ public class guiSliderButton extends GuiButton {
 			this.drawTexturedModalRect(this.xPosition, this.yPosition + (int) sliderValue, textureX + scrollING, textureY,
 					this.width, this.height);
 			this.mouseDragged(mc, i, j);
-			System.out.println(texture+"     "+textureX+"     "+textureY+"     "+sliderValue+this.xPosition+"     "+this.yPosition);
 		}
 	}
 

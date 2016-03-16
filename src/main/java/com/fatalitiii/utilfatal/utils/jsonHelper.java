@@ -18,10 +18,10 @@ import com.google.gson.stream.JsonReader;
 
 /**
  * @author Fatalitiii
- * @Name jsonToClass.java
+ * @Name jsonHelper.java
  * @Comment Convert JSON file to class array
  */
-public class jsonToClass {
+public class jsonHelper {
 
 	public static File modFolder;
 	public static File itemsFolder;
@@ -50,48 +50,6 @@ public class jsonToClass {
 		bis.close();
 	}
 
-	/**
-	 * @Comment Convert JSON data into class
-	 * @param modFolder
-	 *            Mod folder name 
-	 * @param jsonFile
-	 *            JSON file name
-	 * @param cls
-	 *            Class template with defined variables
-	 * @return
-	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static ArrayList getJsonData(File modFolder, String jsonFile, Class<?> cls) {
-		JsonReader reader = null;
-		try {
-			reader = new JsonReader(new InputStreamReader(new FileInputStream(modFolder + "/" + jsonFile + ".json")));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		if (reader != null) {
-			Gson myGson = new Gson();
-			JsonParser jsonParser = new JsonParser();
-			JsonArray jsonArray = jsonParser.parse(reader).getAsJsonArray();
-			ArrayList jsonNames = new ArrayList<>();
-
-			Object itemClass = null;
-			try {
-				itemClass = cls.newInstance();
-			} catch (InstantiationException | IllegalAccessException e) {
-				e.printStackTrace();
-			}
-			if (itemClass != null) {
-				for (JsonElement json : jsonArray) {
-					Object item = itemClass;
-					item = myGson.fromJson(json, itemClass.getClass());
-					jsonNames.add(item);
-				}
-
-				return jsonNames;
-			}
-		}
-		return null;
-
-	}
+	
 
 }

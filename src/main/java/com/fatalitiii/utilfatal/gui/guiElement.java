@@ -3,6 +3,9 @@ package com.fatalitiii.utilfatal.gui;
 import static org.lwjgl.opengl.GL11.*;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.lwjgl.opengl.GL11;
+
+import com.fatalitiii.utilfatal.utils.ModInfo;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -367,7 +370,34 @@ public class guiElement {
 	 */
 	public static void drawRectWithUV(int xPosition, int yPosition, float u, float v, int width, int height,
 			float textureWidth, float textureHeight) {
-		drawRectWithUV(xPosition, yPosition, u, v, width, height, textureWidth, textureHeight, 256, 256);
+		drawRectWithUV(xPosition, yPosition, u, v, width, height, textureWidth, textureHeight, 256, 256,
+				new ResourceLocation(ModInfo.MOD_ID + ":textures/gui/gui.png"));
+	}
+
+	/**
+	 * 
+	 * @param xPosition
+	 *            X position on screen
+	 * @param yPosition
+	 *            Y position on screen
+	 * @param u
+	 *            Texture start X
+	 * @param v
+	 *            Texture start Y
+	 * @param width
+	 *            Width on screen
+	 * @param height
+	 *            Height on screen
+	 * @param textureWidth
+	 *            Texture width
+	 * @param textureHeight
+	 *            Texture height
+	 * @param texture
+	 *            Resource Location
+	 */
+	public static void drawRectWithUV(int xPosition, int yPosition, float u, float v, int width, int height,
+			float textureWidth, float textureHeight, ResourceLocation texture) {
+		drawRectWithUV(xPosition, yPosition, u, v, width, height, textureWidth, textureHeight, 256, 256, texture);
 	}
 
 	/**
@@ -392,11 +422,18 @@ public class guiElement {
 	 *            Texture resource width if not 256
 	 * @param textureSheetHeight
 	 *            Texture resource height if not 256
+	 * @param texture
+	 *            Resource Location
 	 */
 	public static void drawRectWithUV(int xPosition, int yPosition, float u, float v, int width, int height,
-			float textureWidth, float textureHeight, int textureSheetWidth, int textureSheetHeight) {
+			float textureWidth, float textureHeight, int textureSheetWidth, int textureSheetHeight,
+			ResourceLocation texture) {
 		float scaleX = 1.0F / textureSheetWidth;
 		float scaleY = 1.0F / textureSheetHeight;
+
+		GlStateManager.pushMatrix();
+		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+
 		Tessellator tessellator = Tessellator.getInstance();
 		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
 		worldrenderer.startDrawingQuads();
@@ -409,6 +446,27 @@ public class guiElement {
 		worldrenderer.addVertexWithUV((double) xPosition, (double) yPosition, 0.0D, (double) (u * scaleX),
 				(double) (v * scaleY));
 		tessellator.draw();
+		GlStateManager.popMatrix();
+	}
+
+	public static float getCenterWithVar(String string, int xPos, int width, float scale) {
+		int xOffset = 0;
+		char[] str = string.toCharArray();
+		Character[] charArray = ArrayUtils.toObject(str);
+
+		for (int j = 0; j < string.length(); j++) {
+			if (charArray[j].equals('%')) {
+				xOffset += 5;
+			} else {
+				xOffset++;
+			}
+		}
+		return xPos + ((width - xOffset) / 2.5F) - (string.length() / (1 - (scale * 2F) + 3F));
+	}
+
+	public static float getCenter(String string, int xPos, int width, float scale) {
+		return (float) ((xPos + width / 2)
+				- Minecraft.getMinecraft().fontRendererObj.getStringWidth(string) / (2 / scale));
 	}
 
 }

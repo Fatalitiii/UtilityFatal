@@ -174,13 +174,13 @@ public class guiMenu {
 				if (k == selected) {
 					guiElement.addElement(xPos, yPos + (yOffset * 11), 0, 0, 39, 11, "", scale,
 							new ResourceLocation("utilfatal:textures/gui/gui.png"), selectColour, gui);
-					guiElement.addTextWithItem(getCenter((String) text[0]), yPos + (yOffset * 11) + 2 * (1 / scale),
-							scale, text);
+					guiElement.addTextWithItem(guiElement.getCenterWithVar((String) text[0], xPos, width, scale),
+							yPos + (yOffset * 11) + 2 * (1 / scale), scale, text);
 				} else {
 					guiElement.addElement(xPos, yPos + (yOffset * 11), 0, 0, 39, 11, "", scale,
 							new ResourceLocation("utilfatal:textures/gui/gui.png"), gui);
-					guiElement.addTextWithItem(getCenter((String) text[0]), yPos + (yOffset * 11) + 2 * (1 / scale),
-							scale, text);
+					guiElement.addTextWithItem(guiElement.getCenterWithVar((String) text[0], xPos, width, scale),
+							yPos + (yOffset * 11) + 2 * (1 / scale), scale, text);
 				}
 
 			} else {
@@ -192,21 +192,6 @@ public class guiMenu {
 		if (maxShow != slots)
 			guiElement.addElement(xPos, yPos + (yOffset * 11) - 1, 0, 22, 39, 1, "", 0.5F,
 					new ResourceLocation("utilfatal:textures/gui/gui.png"), gui);
-	}
-
-	private float getCenter(String string) {
-		int xOffset = 0;
-		char[] str = string.toCharArray();
-		Character[] charArray = ArrayUtils.toObject(str);
-
-		for (int j = 0; j < string.length(); j++) {
-			if (charArray[j].equals('%')) {
-				xOffset += 5;
-			} else {
-				xOffset++;
-			}
-		}
-		return xPos + ((width - xOffset) / 2.5F) - (string.length() / (1 - (scale * 2F) + 3F));
 	}
 
 	/**
@@ -237,9 +222,9 @@ public class guiMenu {
 	public void setSelected(int selected) {
 		this.selected = selected;
 	}
-	
-	public int getSize(){
+
+	public int getSize() {
 		return menuComponent.size();
 	}
-	
+
 }
