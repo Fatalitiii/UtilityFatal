@@ -1,5 +1,5 @@
 # UtilityFatal
-> **Current Version:** 1.4.0.1 Found [Here](http://minecraft.curseforge.com/projects/api-utilityfatal)
+> **Current Version:** 1.4.0.3 Found [Here](http://minecraft.curseforge.com/projects/api-utilityfatal)
 
 
 API / Library of various methods used in most of my minecraft mods
