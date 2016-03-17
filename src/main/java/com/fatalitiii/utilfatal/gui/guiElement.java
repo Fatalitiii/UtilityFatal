@@ -59,7 +59,6 @@ public class guiElement {
 			int ySize, String text, float scale, ResourceLocation texture, int colour, GuiContainer gui) {
 
 		int c = colour;
-		java.awt.Color.BLACK.getRGB();
 
 		if ((c & -67108864) == 0) {
 			c |= -16777216;
@@ -169,7 +168,7 @@ public class guiElement {
 	 * @param rotateY
 	 *            Y Rotation
 	 */
-	public static void renderModel(float xPosition, float yPosition, int zIndex, float scale, Item item, float rotateX,
+	public static void renderModel(float xPosition, float yPosition, float zIndex, float scale, Item item, float rotateX,
 			float rotateY) {
 		ItemStack stack = new ItemStack(item, 1, 0);
 		EntityItem entity = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, stack);
@@ -194,7 +193,7 @@ public class guiElement {
 	 * @param rotateY
 	 *            Y Rotation
 	 */
-	public static void renderModel(float xPosition, float yPosition, int zIndex, float scale, ItemStack itemStack,
+	public static void renderModel(float xPosition, float yPosition, float zIndex, float scale, ItemStack itemStack,
 			float rotateX, float rotateY) {
 		EntityItem entity = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, itemStack);
 		entity.hoverStart = 0.0F;
@@ -218,7 +217,7 @@ public class guiElement {
 	 * @param rotateY
 	 *            Y Rotation
 	 */
-	public static void renderModel(float xPosition, float yPosition, int zIndex, float scale, Block block,
+	public static void renderModel(float xPosition, float yPosition, float zIndex, float scale, Block block,
 			float rotateX, float rotateY) {
 		ItemStack stack = new ItemStack(Item.getItemFromBlock(block), 1, 0);
 		EntityItem entity = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, stack);
@@ -243,7 +242,7 @@ public class guiElement {
 	 * @param rotateY
 	 *            Y Rotation
 	 */
-	public static void renderModel(float xPosition, float yPosition, int zIndex, float scale, EntityLivingBase entity,
+	public static void renderModel(float xPosition, float yPosition, float zIndex, float scale, EntityLivingBase entity,
 			float rotateX, float rotateY) {
 		entity.renderYawOffset = rotateY;
 		entity.rotationYaw = rotateY;
@@ -253,7 +252,7 @@ public class guiElement {
 		renderModel(entity, xPosition, yPosition, zIndex, scale, scale, scale, -rotateX);
 	}
 
-	private static void renderModel(Entity entity, float xPos, float yPos, int zIndex, float scaleX, float scaleY,
+	private static void renderModel(Entity entity, float xPos, float yPos, float zIndex, float scaleX, float scaleY,
 			float scaleZ, float... rotate) {
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(0, 0, zIndex + 10F);
@@ -368,7 +367,7 @@ public class guiElement {
 	 * @param textureHeight
 	 *            Texture height
 	 */
-	public static void drawRectWithUV(int xPosition, int yPosition, float u, float v, int width, int height,
+	public static void drawRectWithUV(float xPosition, float yPosition, float u, float v, float width, float height,
 			float textureWidth, float textureHeight) {
 		drawRectWithUV(xPosition, yPosition, u, v, width, height, textureWidth, textureHeight, 256, 256,
 				new ResourceLocation(ModInfo.MOD_ID + ":textures/gui/gui.png"));
@@ -395,7 +394,7 @@ public class guiElement {
 	 * @param texture
 	 *            Resource Location
 	 */
-	public static void drawRectWithUV(int xPosition, int yPosition, float u, float v, int width, int height,
+	public static void drawRectWithUV(float xPosition, float yPosition, float u, float v, float width, float height,
 			float textureWidth, float textureHeight, ResourceLocation texture) {
 		drawRectWithUV(xPosition, yPosition, u, v, width, height, textureWidth, textureHeight, 256, 256, texture);
 	}
@@ -425,7 +424,7 @@ public class guiElement {
 	 * @param texture
 	 *            Resource Location
 	 */
-	public static void drawRectWithUV(int xPosition, int yPosition, float u, float v, int width, int height,
+	public static void drawRectWithUV(float xPosition, float yPosition, float u, float v, float width, float height,
 			float textureWidth, float textureHeight, int textureSheetWidth, int textureSheetHeight,
 			ResourceLocation texture) {
 		float scaleX = 1.0F / textureSheetWidth;
@@ -433,6 +432,8 @@ public class guiElement {
 
 		GlStateManager.pushMatrix();
 		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+		glEnable (GL_BLEND);
+		glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		Tessellator tessellator = Tessellator.getInstance();
 		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
